@@ -35,9 +35,10 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
 
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/**", "/h2-console/**").permitAll()
-                .anyRequest().authenticated()
-            )
+            	    .requestMatchers("/auth/**", "/h2-console/**").permitAll()
+            	    .requestMatchers("/wallet/**").hasRole("USER")
+            	    .anyRequest().authenticated()
+            	)
 
             .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
