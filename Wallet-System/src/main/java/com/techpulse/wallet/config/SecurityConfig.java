@@ -35,8 +35,13 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
 
             .authorizeHttpRequests(auth -> auth
+
             	    .requestMatchers("/auth/**", "/h2-console/**").permitAll()
+
+            	    .requestMatchers("/admin/**").hasRole("ADMIN")
+
             	    .requestMatchers("/wallet/**").hasRole("USER")
+
             	    .anyRequest().authenticated()
             	)
 
